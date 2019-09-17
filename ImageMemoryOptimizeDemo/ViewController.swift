@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView.image = UIImage(named: "PNG_800_600")!
+        imageView.image = UIImage(named: "jpeg_1280_720")!
     }
 
 }
