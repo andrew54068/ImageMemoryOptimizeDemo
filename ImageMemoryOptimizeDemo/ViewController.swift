@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let path = Bundle.main.path(forResource: "PNG_transparency_demonstration_1.png" , ofType: "png")!
+        let path = Bundle.main.path(forResource: "jpeg_1280_720" , ofType: "jpeg")!
         let fileURL = URL(fileURLWithPath: path)
         
         imageView.image = downsample(imageAt: fileURL, maxDimentionInPixels: 100)
