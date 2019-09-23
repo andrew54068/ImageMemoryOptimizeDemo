@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     lazy var collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.estimatedItemSize = CGSize(width: (UIScreen.main.bounds.width - 30) / 2, height: (UIScreen.main.bounds.width - 30) / 2)
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 30) / 2, height: (UIScreen.main.bounds.width - 30) / 2)
         let view: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
@@ -28,24 +28,27 @@ class ViewController: UIViewController {
         return urls
     }()
     
+    private lazy var image: [UIImage?] = Array(repeating: nil, count: imageURLs.count)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.prefetchDataSource = self
+        collectionView.isPrefetchingEnabled = true
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        
     }
     
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageURLs.count
@@ -53,10 +56,32 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCell
-        let image = downsample(imageAt: imageURLs[indexPath.item], maxDimentionInPixels: cell.bounds.width)
-        cell.setUpImage(image)
+        let cellWidth = cell.bounds.width
+        if let savedImage = self.image[indexPath.item] {
+            cell.setUpImage(savedImage)
+        } else {
+            DispatchQueue.global(qos: .userInteractive).async {
+                let image = self.downsample(imageAt: self.imageURLs[indexPath.item], maxDimentionInPixels: cellWidth)
+                DispatchQueue.main.async {
+                    cell.setUpImage(image)
+                }
+            }
+        }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCell
+            let cellWidth = cell.bounds.width
+            DispatchQueue.global(qos: .userInteractive).async {
+            let image = self.downsample(imageAt: self.imageURLs[indexPath.item], maxDimentionInPixels: cellWidth)
+                self.image[indexPath.item] = image
+            }
+        }
+    }
+    
+    
     
 }
 
