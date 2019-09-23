@@ -9,18 +9,57 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet var imageView: UIImageView!
+    
+    lazy var collectionView: UICollectionView = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.estimatedItemSize = CGSize(width: (UIScreen.main.bounds.width - 30) / 2, height: (UIScreen.main.bounds.width - 30) / 2)
+        let view: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return view
+    }()
+    
+    private lazy var imageURLs: [URL] = {
+        var urls: [URL] = []
+        for i in 0...32 {
+            let path = Bundle.main.path(forResource: "img_" + "\(i)", ofType: "jpg")!
+            let fileURL = URL(fileURLWithPath: path)
+            urls.append(fileURL)
+        }
+        return urls
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        view.addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         
-        downloadFromUrl("https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png") { [weak self] image in
-            DispatchQueue.main.async {
-                self?.imageView.image = image
-            }
-        }
     }
+    
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageURLs.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCell
+        cell.setUpImage(imageURLs[indexPath.item])
+        return cell
+    }
+    
+}
+
+extension ViewController {
     
     func downsample(imageAt imageURL: URL, maxDimentionInPixels: CGFloat) -> UIImage {
         let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
@@ -58,5 +97,5 @@ class ViewController: UIViewController {
             completion(self.downsample(imageAt: data, maxDimentionInPixels: 300))
             }.resume()
     }
-
+    
 }
