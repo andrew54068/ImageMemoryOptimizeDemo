@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5B88A4967A66E4BDC0D0432 /* Pods_ImageMemoryOptimizeDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 691938CB73333B6300D6C201 /* Pods_ImageMemoryOptimizeDemo.framework */; };
 		C17950C4233911A2008A8B22 /* img_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C179507F233911A2008A8B22 /* img_10.jpg */; };
 		C17950C5233911A2008A8B22 /* img_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C1795080233911A2008A8B22 /* img_1.jpg */; };
 		C17950C6233911A2008A8B22 /* img_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C1795081233911A2008A8B22 /* img_0.jpg */; };
@@ -52,6 +53,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11212B9CD401A16A0E92C805 /* Pods-ImageMemoryOptimizeDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageMemoryOptimizeDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImageMemoryOptimizeDemo/Pods-ImageMemoryOptimizeDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		691938CB73333B6300D6C201 /* Pods_ImageMemoryOptimizeDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImageMemoryOptimizeDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDF5C1E4F01A24A367F2779A /* Pods-ImageMemoryOptimizeDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageMemoryOptimizeDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImageMemoryOptimizeDemo/Pods-ImageMemoryOptimizeDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C179507F233911A2008A8B22 /* img_10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_10.jpg; sourceTree = "<group>"; };
 		C1795080233911A2008A8B22 /* img_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_1.jpg; sourceTree = "<group>"; };
 		C1795081233911A2008A8B22 /* img_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_0.jpg; sourceTree = "<group>"; };
@@ -137,12 +141,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5B88A4967A66E4BDC0D0432 /* Pods_ImageMemoryOptimizeDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D0594B5BAA1A4DDBAEAE504 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				11212B9CD401A16A0E92C805 /* Pods-ImageMemoryOptimizeDemo.debug.xcconfig */,
+				BDF5C1E4F01A24A367F2779A /* Pods-ImageMemoryOptimizeDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		936467DDFCEFB1A60E6A32B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				691938CB73333B6300D6C201 /* Pods_ImageMemoryOptimizeDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C179507E233911A2008A8B22 /* TestImages */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +253,8 @@
 			children = (
 				C1BED2EC232FD1B100B16091 /* ImageMemoryOptimizeDemo */,
 				C1BED2EB232FD1B100B16091 /* Products */,
+				0D0594B5BAA1A4DDBAEAE504 /* Pods */,
+				936467DDFCEFB1A60E6A32B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -267,9 +291,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C1BED2FC232FD1B300B16091 /* Build configuration list for PBXNativeTarget "ImageMemoryOptimizeDemo" */;
 			buildPhases = (
+				272473528A150513DFD55A2B /* [CP] Check Pods Manifest.lock */,
 				C1BED2E6232FD1B100B16091 /* Sources */,
 				C1BED2E7232FD1B100B16091 /* Frameworks */,
 				C1BED2E8232FD1B100B16091 /* Resources */,
+				13EC29D969606A0AD08D3407 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -361,6 +387,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		13EC29D969606A0AD08D3407 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ImageMemoryOptimizeDemo/Pods-ImageMemoryOptimizeDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaDebug/CocoaDebug.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaDebug.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ImageMemoryOptimizeDemo/Pods-ImageMemoryOptimizeDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		272473528A150513DFD55A2B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ImageMemoryOptimizeDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C1BED2E6232FD1B100B16091 /* Sources */ = {
@@ -513,6 +578,7 @@
 		};
 		C1BED2FD232FD1B300B16091 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11212B9CD401A16A0E92C805 /* Pods-ImageMemoryOptimizeDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -531,6 +597,7 @@
 		};
 		C1BED2FE232FD1B300B16091 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF5C1E4F01A24A367F2779A /* Pods-ImageMemoryOptimizeDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

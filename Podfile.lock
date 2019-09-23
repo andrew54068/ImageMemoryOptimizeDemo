@@ -1,0 +1,16 @@
+PODS:
+  - CocoaDebug (0.7.9)
+
+DEPENDENCIES:
+  - CocoaDebug
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CocoaDebug
+
+SPEC CHECKSUMS:
+  CocoaDebug: e45d6f458493cf038c7544afa10dc949a267eb47
+
+PODFILE CHECKSUM: ba16e0f5a0595be15da040bf840a5ed3df64cb96
+
+COCOAPODS: 1.5.3
