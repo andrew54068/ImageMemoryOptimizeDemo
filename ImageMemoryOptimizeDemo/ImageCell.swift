@@ -31,5 +31,9 @@ class ImageCell: UICollectionViewCell {
         }
         fatalError("file not exit")
     }
+    
+    func setUpImage(_ image: UIImage) {
+        imageView.image = image
+    }
 
 }

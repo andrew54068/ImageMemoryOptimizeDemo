@@ -53,7 +53,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ImageCell
-        cell.setUpImage(imageURLs[indexPath.item])
+        let image = downsample(imageAt: imageURLs[indexPath.item], maxDimentionInPixels: cell.bounds.width)
+        cell.setUpImage(image)
         return cell
     }
     
